@@ -94,7 +94,6 @@ public class Main {
     private Timer rebootTimer;
     private Timer justStartedTimer;
 
-    private boolean playSoundNow = false;
     private Vector3d soundLoc;
 
     private Config config;
@@ -400,21 +399,6 @@ public class Main {
                             broadcastMessage("&f[&6Restart&f] " + message);
                         } else {
                             logger.info("[MMCReboot] " + "&bThe server will be restarting in &f" + hours + "h" + minutes + "m" + seconds + "s");
-                        }
-                        if (!playSoundNow && Config.playSoundFirstTime >= aTimerBroadcast) {
-                            playSoundNow = true;
-                        }
-                        for (World w : Sponge.getServer().getWorlds()) {
-                            if (Config.playSoundEnabled && playSoundNow) {
-                                Optional<SoundType> sound = Sponge.getGame().getRegistry().getType(SoundType.class, Config.playSoundString);
-                                SoundType playSound;
-                                if (sound.isPresent()) {
-                                    playSound = sound.get();
-                                } else {
-                                    playSound = Sponge.getGame().getRegistry().getType(SoundType.class, "block.note.pling").get();
-                                }
-                                w.playSound(playSound, soundLoc, 4000);
-                            }
                         }
                         for (Player p : Sponge.getServer().getOnlinePlayers()) {
                             if (Config.titleEnabled) {
