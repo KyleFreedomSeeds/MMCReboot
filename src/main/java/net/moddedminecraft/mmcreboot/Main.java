@@ -444,7 +444,6 @@ public class Main {
         isRestarting = false;
         broadcastMessage("&cServer is restarting, we'll be right back!");
         try {
-            Sponge.getCommandManager().process(Sponge.getServer().getConsole(), "save-all");
             if (Config.kickmessage.isEmpty()) {
                 Sponge.getServer().shutdown();
             } else {
